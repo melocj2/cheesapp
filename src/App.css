@@ -1,38 +1,250 @@
-.App {
+*{
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  margin-left:auto;
+  margin-right:auto;
+  width:960px;
+  position: relative;
+}
+
+#board {
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+[class^="colored"] {
+  width: 75px;
+  height: 75px;
+  border: 3px solid black;
+  display: inline-block;
+  margin-left: -4px;
+  vertical-align: top;
+  margin-top: -3px;
+}
+
+.colored-light { 
+  background-color: #E3C16F;
+}
+
+.colored-dark { 
+  background-color: #b88b4a;
+}
+
+.colored-white {
+  background-color: #ececec;
+}
+
+.colored-blue {
+  background-color: #4498cf;
+}
+
+.colored-olive {
+  background-color: #ADBD8F;
+}
+
+.colored-emerald {
+  background-color: #6f8f72;
+}
+
+.colored-softer {
+  background-color: #faecf3;
+}
+
+.colored-pink {
+  background-color: #f576ba;
+}
+
+.colored-green {
+  background-color: #95e46e;
+}
+
+.colored-grey {
+  background-color: 	#a58dfc;
+}
+
+.colored-red {
+  background-color: #f70d1a;
+}
+
+.piece {
+  width: 90%;
+  height: auto;
+  position: relative;
+  top: 6%;
+  left: 4%;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.capturedPieces {
+  display: inline-block;
+  height: 40px;
+}
+
+.CapPiece {
+  width: 40px;
+  height: auto;
+  position: relative;
+  padding-left: 2px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.cappawn {
+  margin-left: -30px;
+}
+
+.points {
+  display: inline-block;
+  position: relative;
+  bottom: 15px;
+  left: 5px;
+  color: #A9A9A9;
+}
+
+.box {
+  display: inline-block;
+  position: absolute;
+  left: 640px;
+  bottom: 119px;
+  height: 495px;
+  width: 40px;
+}
+
+#xbutton, #clrbutton, #rstbutton {
+  font-size: 25px;
+  position: relative;
+  left: 2px;
+  background: transparent;
+  border: none;
+}
+
+#clrbutton, #rstbutton {
+  font-size: 14px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.boxpiece {
+  width: 90%;
+  height: auto;
+  position: relative;
+  left: 4%;
+  padding-top: 3px;
+  bottom: 20px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.boxpiece:active {
+  background: #93DB70 !important;
+}
+
+#xbutton:focus, #clrbutton:focus, #rstbutton:focus, .button-true:focus, .button-false:focus {
+  outline: none !important;
+}
+
+[class^="button"] {
+  position: absolute;
+  left: 640px;
+  top: 10px;
+}
+
+.button-false {
+  background: #93DB70;
+}
+
+.button-true {
+  background: #f70d1a;
+}
+
+
+
+.temp-change, .undo, .redo, .turnStatement {
+  background-color: #d4a35f;
+  border-radius: 5px;
+  border: none;
+  width: 100px;
+  margin-bottom: 10px;
+  height: 20px;
+  color: white;
+  box-shadow: 0px 2px 0px #b88b4a;
+  outline: none;
+  font-weight: bold;
+  font-size: 15px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.temp-change:hover, .undo:hover, .redo:hover, .turnStatement:hover {
+  box-shadow: 0px 2px 0px #b88b4a, 0px 0px 10px #ffc370;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.temp-change:active, .undo:active, .redo:active, .turnStatement:active {
+  color: #8f6b38;
+}
+
+.blackCirc {
+  display: inline-block;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  margin-top: 4px;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.whiteCirc {
+  display: inline-block;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  margin-top: 4px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+
+@media screen and (max-width: 645px) {
+  [class^="colored"] {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin-left: -4px;
+    vertical-align: top;
+    margin-top: -3px;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .box {
+    left: 355px;
+    bottom: -128px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .boxpiece {
+    width: 50%;
   }
+
+
+  #xbutton, #clrbutton, #rstbutton {
+    font-size: 10px;
+  }
+
+
 }
