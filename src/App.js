@@ -22,19 +22,19 @@ import Turn from './components/turn';
         11 = white queen;
         */
 
-        /* I think 
+        /* I think
         I may need to overhaul this entire program
-        it might be easier is all pieces constantly calculate their own possible paths at every moment. 
-        this way, when I come to the rules involving the king/blocking check etc. 
+        it might be easier is all pieces constantly calculate their own possible paths at every moment.
+        this way, when I come to the rules involving the king/blocking check etc.
         it will be easier to plot. which moves to allow and not allow are diffuclt to code. For example,
         how do I allow for a block? I can code the possible moves for a king, and then if every single piece has a path I can make it so that the king
-        cannot move into the path of an enemy piece. 
+        cannot move into the path of an enemy piece.
 
       every move must have:
-      
+
       1) king danger check at the top: is the king in the path of another piece?
-      if so, 
-      2) king danger two... 
+      if so,
+      2) king danger two...
       can you move the king to safety, block or capture the offending piece??
       no? CHECKMATE BABY
       if yes then you must make one of those moves
@@ -47,7 +47,7 @@ import Turn from './components/turn';
       1) sometimes, when 'undoing' a bunch of moves/captures, an inaccurate amount of points will be calculated out of nowhere in the score,
       even though no pieces are displayed... perhaps from negative values being calulated in the code somewhere??? find out on the next episode of dbz
 
-      2) when deleting pieces, if you select one and delete a different one, both the piece currently selected and the pieced you meant to delete are 
+      2) when deleting pieces, if you select one and delete a different one, both the piece currently selected and the pieced you meant to delete are
       deleted, only for white, not for black VERY CURIOUS
 
       3) CLEAN UP THE RECURIVE FUNCTIONS INVOLVED IN THE CHECK MECHANIC, they are a little sloppy. It takes the queen sometimes almost a full second to calculate all of her moves
@@ -72,14 +72,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       isWhiteTurn: true,
-      board: [1,2,3,5,4,3,2,1,                     
-        0,0,0,0,0,0,0,0,                          
-        -1,-1,-1,-1,-1,-1,-1,-1,                  
-        -1,-1,-1,-1,-1,-1,-1,-1,                  
-        -1,-1,-1,-1,-1,-1,-1,-1,                  
-        -1,-1,-1,-1,-1,-1,-1,-1,                  
-        6,6,6,6,6,6,6,6,                          
-        7,8,9,11,10,9,8,7                         
+      board: [1,2,3,5,4,3,2,1,
+        0,0,0,0,0,0,0,0,
+        -1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,
+        6,6,6,6,6,6,6,6,
+        7,8,9,11,10,9,8,7
       ],
       history: [],
       redoLib: [],
@@ -143,11 +143,11 @@ class App extends React.Component {
 
   //lifecycle methods
 
-  /*static getDerivedStateFromProps(props, state) { 
+  /*static getDerivedStateFromProps(props, state) {
     console.log(state.count, state.history)
     return {
        count: state.count++ // figured out how to run all possible moves and put it into state
-       //every time state updates... now we need an algo for calclating all possible moves on the 
+       //every time state updates... now we need an algo for calclating all possible moves on the
        //board xP
     }
  }  */
@@ -168,12 +168,12 @@ wPawn = (n, layered = false, board = this.state.board) => {
   if (n > 47 & n < 56 & board[n-16] === -1) {
     path.push(n-16);
   }
-  if (board[n] === 6) {console.log("between the heys is epawn" + path + "HEY");}
+  // if (board[n] === 6) {console.log("between the heys is epawn" + path + "HEY");}
 
   if (!layered) {
     path = this.isCheck(n, path);}
 
-  console.log('this should have nothing in it??' + path)
+  // console.log('this should have nothing in it??' + path)
 
   return path;
 }
@@ -191,7 +191,7 @@ bPawn = (n, layered = false, board = this.state.board) => {
   if (n > 7 & n < 16 & board[n+16] === -1) {
     path.push(n+16);
   }
-  if (board[n] === 0) {console.log(path);}
+  // if (board[n] === 0) {console.log(path);}
 
   if (!layered) {
     path = this.isCheck(n, path); }
@@ -201,7 +201,7 @@ bPawn = (n, layered = false, board = this.state.board) => {
 
 bishop = (n, w, b, layered = false, board = this.state.board) => {
 
-  let bpath = []; 
+  let bpath = [];
 
   let lineOne = true;
   let p = n;
@@ -338,7 +338,7 @@ while (lineFour === true) {
       bpath.push(s)
     }
 }
-if (b === 3) {console.log(bpath)};
+// if (b === 3) {console.log(bpath)};
 
 if (!layered) {
   bpath = this.isCheck(n, bpath); }
@@ -422,19 +422,19 @@ knight = (n, layered = false, board = this.state.board) => {
     protoPath = protoPath.filter(i => !whitePc.includes(board[i]) )
   }
 
-  if (board[n] === 2 | board[n] === 8) {console.log(protoPath)};
+  // if (board[n] === 2 | board[n] === 8) {console.log(protoPath)};
 
 
   if (!layered) {
   protoPath = this.isCheck(n, protoPath); }
 
   return protoPath;
-  
+
 }
 
 rook = (n, w, b, layered = false, board = this.state.board) => {
 
-  let bpath = []; 
+  let bpath = [];
 
   let lineOne = true;
   let p = n;
@@ -477,7 +477,7 @@ let lineTwo = true;
 
 if (this.state.leftEdge.includes(n)) {
     lineTwo = false;
-    console.log('problem here')
+    // console.log('problem here')
   }
 
 while (lineTwo === true) {
@@ -572,14 +572,14 @@ while (lineFour === true) {
       bpath.push(s)
     }
 }
-if (b === 1) {console.log(bpath)};
+// if (b === 1) {console.log(bpath)};
 
 if (!layered) {
   bpath = this.isCheck(n, bpath);}
 
 return bpath;
 
-} 
+}
 
 
 queen = (n, w, b, layered = false, board = this.state.board) => {
@@ -588,7 +588,7 @@ queen = (n, w, b, layered = false, board = this.state.board) => {
 
   let bpath = bishop.concat(rook);
 
-if (b === 5 | w === 11) {console.log(bpath, "CHECK THIS OUT HEEEEEEY)  ")};
+// if (b === 5 | w === 11) {console.log(bpath, "CHECK THIS OUT HEEEEEEY)  ")};
 
 if (!layered) {
 bpath = this.isCheck(n, bpath); }
@@ -653,7 +653,7 @@ king = (n, w, b, layered = false, board = this.state.board, fromCastle = false) 
     bpath = bpath.filter(i => board[i] === -1 | (board[i] < 12 & board[i] > 5 & board[i] !== 7.5 & i > -1 & i < 64))
   }
 
-  if (b === 4 | w === 10) {console.log(bpath)};
+  // if (b === 4 | w === 10) {console.log(bpath)};
 
   if (!layered) {
   bpath = this.isCheck(n, bpath);}
@@ -720,24 +720,24 @@ king = (n, w, b, layered = false, board = this.state.board, fromCastle = false) 
       history: hist
     }))
   }
-      
+
 
   canCastleKing = (n) => {
     if (this.state.board[n] === 4) {
-      if ((this.isCheck(n, [5, 6], true).length === 2) & 
+      if ((this.isCheck(n, [5, 6], true).length === 2) &
           !(this.inCheck(this.state.board, "black", true)) &
           !(this.state.blackKingMoved) &
           !(this.state.blackKingRookMoved) &
           (this.state.board[5] === -1) &
           (this.state.board[6] === -1)) {
-            console.log('true GOT EM' + this.isCheck(n, [4, 5, 6], true))
+            // console.log('true GOT EM' + this.isCheck(n, [4, 5, 6], true))
         return true;}
       else {
-            console.log('problem with the function')
+            // console.log('problem with the function')
         return false;}
     }
     if (this.state.board[n] === 10) {
-      if ((this.isCheck(n, [61, 62], true).length === 2) & 
+      if ((this.isCheck(n, [61, 62], true).length === 2) &
         !(this.inCheck(this.state.board, "white", true)) &
         !(this.state.blackKingMoved) &
         !(this.state.blackKingRookMoved) &
@@ -751,21 +751,21 @@ king = (n, w, b, layered = false, board = this.state.board, fromCastle = false) 
 
   canCastleQueen = (n) => {
     if (this.state.board[n] === 4) {
-      if ((this.isCheck(n, [1, 2, 3], true).length === 3) & 
+      if ((this.isCheck(n, [1, 2, 3], true).length === 3) &
           !(this.inCheck(this.state.board, "black", true)) &
           !(this.state.blackKingMoved) &
           !(this.state.blackQueenRookMoved) &
           (this.state.board[1] === -1) &
-          (this.state.board[2] === -1) & 
+          (this.state.board[2] === -1) &
           (this.state.board[3] === -1)) {
-            console.log('true GOT EM' + this.isCheck(n, [4, 5, 6], true))
+            // console.log('true GOT EM' + this.isCheck(n, [4, 5, 6], true))
         return true;}
       else {
-            console.log('problem with the function')
+            // console.log('problem with the function')
         return false;}
     }
     if (this.state.board[n] === 10) {
-      if ((this.isCheck(n, [57, 58, 59], true).length === 3) & 
+      if ((this.isCheck(n, [57, 58, 59], true).length === 3) &
         !(this.inCheck(this.state.board, "white", true)) &
         !(this.state.blackKingMoved) &
         !(this.state.blackKingRookMoved) &
@@ -856,7 +856,7 @@ king = (n, w, b, layered = false, board = this.state.board, fromCastle = false) 
     }
     let i = board.indexOf(king)
     let danger = this.allPaths(board, opponent, true, fromCastle);
-    console.log(danger + "this looks like it doesnt change")
+    // console.log(danger + "this looks like it doesnt change")
     if (danger.includes(i)){
       return true;
     }
@@ -878,7 +878,7 @@ king = (n, w, b, layered = false, board = this.state.board, fromCastle = false) 
       board[x] = board[n];
       board[n] = -1;
       let result = this.inCheck(board, player, fromCastle);
-      console.log(result + "should have a true in here");
+      // console.log(result + "should have a true in here");
       return !result;
     });
     return arr;
@@ -889,31 +889,31 @@ king = (n, w, b, layered = false, board = this.state.board, fromCastle = false) 
   // function is not identifying obvious check positions, unfortunately.
   // the most disturbing thing is that there is no obvious flaws.
 
-  //I think I have discovered the problem... I have called all of the other functions in the program without a 
+  //I think I have discovered the problem... I have called all of the other functions in the program without a
   //board perameter, and they all call this.state.board inside of them.
-  // this will probably require a tedious rewrite of all of the movement funcitons, as well as all 
+  // this will probably require a tedious rewrite of all of the movement funcitons, as well as all
   //funcitons that call those functions.... oy vey
 
   colorChange = (n) => {
     if (n === "light") {
       this.setState({
         color: ["light", "dark"]
-      }) 
+      })
     }
     if (n === "blue") {
       this.setState({
         color: ["white", "blue"]
-      }) 
+      })
     }
     if (n === "green") {
       this.setState({
         color: ["olive", "emerald"]
-      }) 
+      })
     }
     if (n === "pink") {
       this.setState({
       color: ["softer", "pink"]
-    }) 
+    })
   }
 }
 
@@ -984,7 +984,7 @@ king = (n, w, b, layered = false, board = this.state.board, fromCastle = false) 
       let captureCheck2 = this.getCap(hist[0]);
       let newCapture = this.capCheck(captureCheck1, captureCheck2);
       let captured = [...this.state.captured];
-      console.log(newCapture +"FIGURE THIS SHIT OUT")
+      // console.log(newCapture +"FIGURE THIS SHIT OUT")
       if (newCapture !== false) {
         captured[newCapture] = captured[newCapture]-1;
       }
@@ -1038,9 +1038,9 @@ king = (n, w, b, layered = false, board = this.state.board, fromCastle = false) 
 
 
   //below in the piece I added, I actually let state know that these peices have not moved, that will become relevant later when I check for this to verify the possibility of castling or not
-  //however, I need a way of changing this when they move... 
+  //however, I need a way of changing this when they move...
 
-  
+
   togglePlay = () => {
     if (this.state.firstToggle) {
       let frontLeft = true;
@@ -1125,7 +1125,7 @@ lastIndex: '',
 captured: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 grab: false
     })
-  }  
+  }
 
   grab = (num) => {
   //  this checks if the user has already selected a piece or not
@@ -1138,7 +1138,7 @@ grab: false
 
   counter = (num, arr) => {
     let count = 0;
-    let i = 0; 
+    let i = 0;
     while (i < arr.length) {
         if(arr[i] === num){
             count++;    }
@@ -1175,7 +1175,7 @@ grab: false
     return arr;
   }
 
-  unhand = () => {   //it simply reverses the state back to neutral when you click again on the same exact piece as was originally selected. 
+  unhand = () => {   //it simply reverses the state back to neutral when you click again on the same exact piece as was originally selected.
     this.setState({
       touchMove: false,
       focusPiece: Array.from(Array(64).keys()).map(x => false),
@@ -1185,13 +1185,13 @@ grab: false
     })
   }
 
-  //so I think what we need to do is significantly change the manner in which enpassant is called. I just realized that the enpassant moves are not actually added to the path 
+  //so I think what we need to do is significantly change the manner in which enpassant is called. I just realized that the enpassant moves are not actually added to the path
   //of the piece, and therefore, they don't actually 'light up' as viable moves. I cannot have that in my game.
-  //It is required that I have enpassant moves added to the viable pathways. What I might even do is no longer have an enpassant like area within the pawn movement, then call 
-  //it only within the pawn function, and add the possible moves to the path. This will require some figuring. 
+  //It is required that I have enpassant moves added to the viable pathways. What I might even do is no longer have an enpassant like area within the pawn movement, then call
+  //it only within the pawn function, and add the possible moves to the path. This will require some figuring.
 
   enpassant = (n) => {
-    console.log()
+    // console.log()
     if (this.state.playmode) {
       if ((this.isCheck(this.state.lastIndex, [n])).length < 1) {
         this.unhand();
@@ -1209,7 +1209,7 @@ grab: false
         arr[n] = this.state.chosenPiece;
         this.captured(arr, refresh, captured, hist); ////KJHKJHSKJHHHHHHHHHHHHHHHHHHHHH
       }
-      if ((this.state.lastIndex >= 8 & this.state.lastIndex <= 15) | (n === this.state.lastIndex + 16) & this.state.board[n] === -1) { 
+      if ((this.state.lastIndex >= 8 & this.state.lastIndex <= 15) | (n === this.state.lastIndex + 16) & this.state.board[n] === -1) {
         let arr = [...this.state.board];
         let hist = [arr, ...this.state.history];
         arr = arr.map((x) => {
@@ -1234,7 +1234,7 @@ grab: false
         }))
       }
       else {
-        console.log("error, no if statements in 'enpassat' fired under the black piece")
+        // console.log("error, no if statements in 'enpassat' fired under the black piece")
       }
     }
     if (this.state.chosenPiece === 6) {
@@ -1274,11 +1274,11 @@ grab: false
         }))
       }
       else {
-        console.log("error, no if statements in 'enpassat' fired under the white piece")
+        // console.log("error, no if statements in 'enpassat' fired under the white piece")
       }
     }
     else {
-      console.log("error, couldn't differentiate black from white")
+      // console.log("error, couldn't differentiate black from white")
     }
   }
 
@@ -1293,7 +1293,7 @@ grab: false
     let path = this.allPaths(this.state.board, player);
     let check = this.inCheck(this.state.board, player, true);
 
-    if (check) {
+    if (path.length <= 0 & check) {
       alert("checkmate");
       return true;
     }
@@ -1303,14 +1303,13 @@ grab: false
     }
     else if (check) {
       alert("check");
-      return false;
-    } 
+    }
     return false;
   }
 
   // End of utility functions
-  
-  // Start of the movement functions (there are two, but they are both a little long) 
+
+  // Start of the movement functions (there are two, but they are both a little long)
 
   playmove = (n) => {
 
@@ -1321,14 +1320,14 @@ grab: false
     if (this.state.touchMove === false) {  //  this checks if the user has already selected a piece or not
       if (this.state.isWhiteTurn & (this.state.board[n] > -1 & this.state.board[n] < 6)) {
         this.unhand();
-        console.log('hello')
+        // console.log('hello')
       }
       else if (!this.state.isWhiteTurn & (this.state.board[n] > 5 & this.state.board[n] < 12)) {
         this.unhand();
       }
       else if (this.state.board[n] !== -1 & this.state.board[n] !== 2.5 & this.state.board[n] !== 7.5) { //     this ensures that the user can select anything that is not an empty square
         let nPath = [];
-        if (this.state.board[n] === 6) {nPath.push(...this.wPawn(n))} 
+        if (this.state.board[n] === 6) {nPath.push(...this.wPawn(n))}
         if (this.state.board[n] === 0) {nPath.push(...this.bPawn(n))}//!KJBNJLH_)!#I_)!I#_+)!#+!#(+(_!#+_)(+_++___________+)+_)+_)+_)+_)+)_+_)+)________________________________JAKE___MELOCHE_______IS____A______XD______FUNNY____LITTLE_____GUY
         if (this.state.board[n] === 3 | this.state.board[n] === 9) {nPath.push(...this.bishop(n, 9, 3))}
         if (this.state.board[n] === 2 | this.state.board[n] === 8) {nPath.push(...this.knight(n))}
@@ -1341,7 +1340,7 @@ grab: false
           if (nPath.includes(this.state.boardSquares[i])) {
             if (this.state.board[i] === -1) {
               return 0;
-            } 
+            }
             else {
               return 2;
             }
@@ -1386,9 +1385,9 @@ grab: false
       });
       arr[this.state.lastIndex] = -1;
       arr[n] = this.state.chosenPiece;
-      this.queenPawn(n, arr); // returns array of board w pieces, ensuring 
+      this.queenPawn(n, arr); // returns array of board w pieces, ensuring
       this.captured(arr, refresh, captured, hist) ////kasjdkjashdkjashdkjahsdkjhasdkjashdkjasdjkashjkd
-    } 
+    }
     else if (this.state.board[n] === -1 & this.state.chosenPath.includes(n)){
         let arr = [...this.state.board];
         let hist = [arr, ...this.state.history];
@@ -1402,7 +1401,7 @@ grab: false
         });
         arr[this.state.lastIndex] = -1;
         arr[n] = this.state.chosenPiece;
-        this.queenPawn(n, arr); // returns array of board w pieces, ensuring 
+        this.queenPawn(n, arr); // returns array of board w pieces, ensuring
         this.setState(state => ({     //     that if pawn gets to end it is changed to a queen
           redoLib: [],
           isWhiteTurn: !state.isWhiteTurn,
@@ -1417,9 +1416,9 @@ grab: false
         this.unhand();
       }
     }
-  
-  
-//see state property above 'canMove', this 
+
+
+//see state property above 'canMove', this
   move = (n) => {
     if (this.state.playmode) {
       this.playmove(n);
@@ -1463,8 +1462,8 @@ grab: false
         if ((this.state.chosenPiece >= 6 & (this.state.board[n] < 6 | this.state.board[n] === 7.5)) | (this.state.chosenPiece < 6 & (this.state.board[n] > 5 | this.state.board[n] === -1 | this.state.board[n] === 2.5))) { // this, rather long expression ensures that the user cannot capture their own pieces
           if ((this.state.chosenPiece === 0 & ((this.state.lastIndex >= 32 & this.state.lastIndex <= 39) & ((n === (this.state.lastIndex + 9)) | (n === (this.state.lastIndex + 7))) & (this.state.board[n] === 7.5)) | ((this.state.lastIndex >= 8 & this.state.lastIndex <= 15) & (n === (this.state.lastIndex + 16))))| ((this.state.chosenPiece === 6 & ((this.state.lastIndex >= 24 & this.state.lastIndex <= 31) & ((n === (this.state.lastIndex - 9)) | (n === (this.state.lastIndex - 7))) & (this.state.board[n] === 2.5)) | ((this.state.lastIndex >= 48 & this.state.lastIndex <= 55) & (n === (this.state.lastIndex - 16)))))) {
             this.enpassant(n)
-          } 
-          
+          }
+
           else if (this.state.board[n] !== -1 & this.state.grab === false) {
               let refresh = Array.from(Array(64).keys()).map(x => false);
               let captured = this.state.board[n];
@@ -1480,8 +1479,8 @@ grab: false
               });
               arr[this.state.lastIndex] = -1;
               arr[n] = this.state.chosenPiece;
-              this.queenPawn(n, arr); // returns array of board w pieces, ensuring 
-              this.captured(arr, refresh, captured, hist) ///akjshdkjashdkjashkdjhajskd 
+              this.queenPawn(n, arr); // returns array of board w pieces, ensuring
+              this.captured(arr, refresh, captured, hist) ///akjshdkjashdkjashkdjhajskd
             }
           else {
             let arr = [...this.state.board];
@@ -1496,7 +1495,7 @@ grab: false
             });
             arr[this.state.lastIndex] = -1;
             arr[n] = this.state.chosenPiece;
-            this.queenPawn(n, arr); // returns array of board w pieces, ensuring 
+            this.queenPawn(n, arr); // returns array of board w pieces, ensuring
             this.setState({     //     that if pawn gets to end it is changed to a queen
               touchMove: false,
               board: arr,
